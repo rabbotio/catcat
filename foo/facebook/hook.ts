@@ -1,4 +1,10 @@
 const postHook = (req, res) => {
+  // Responder
+  const { ACCESS_TOKEN } = req.webtaskContext.secrets
+  const Responder = require('./responder')
+  const responder = new Responder(ACCESS_TOKEN)
+
+  // Handler
   const { receivedMessage } = require('./handler')
   const data = req.body;
 
@@ -15,7 +21,7 @@ const postHook = (req, res) => {
         if (messagingEvent.optin) {
           console.log(messagingEvent);
         } else if (messagingEvent.message) {
-          receivedMessage(messagingEvent);
+          receivedMessage(messagingEvent, responder);
         } else if (messagingEvent.delivery) {
           console.log(messagingEvent);
         } else if (messagingEvent.postback) {
