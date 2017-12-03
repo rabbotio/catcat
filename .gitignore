@@ -23,4 +23,6 @@ yarn-error.log*
 
 foo/**/*.js
 bar/**/*.js
-fetcher/**/*.js
+facebook/**/*.js
+model/**/*.js
+lib/fetcher/*.js

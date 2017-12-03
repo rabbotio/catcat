@@ -5,6 +5,8 @@ const postHook = (req, res) => {
   const responder = new Responder(ACCESS_TOKEN)
 
   // Handler
+  const Foo = require('../foo')
+  const foo = new Foo(responder)
   const { receivedMessage } = require('./handler')
   const data = req.body;
 
@@ -21,7 +23,7 @@ const postHook = (req, res) => {
         if (messagingEvent.optin) {
           console.log(messagingEvent);
         } else if (messagingEvent.message) {
-          receivedMessage(messagingEvent, responder);
+          receivedMessage(messagingEvent, foo);
         } else if (messagingEvent.delivery) {
           console.log(messagingEvent);
         } else if (messagingEvent.postback) {

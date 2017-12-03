@@ -21,7 +21,7 @@ class Responder {
   }
 
   callSendAPI(accessToken, messageData) {
-    const { postJSON } = require('../../fetcher')
+    const { postJSON } = require('../lib/fetcher')
     postJSON(`${this.facebookURL}?access_token=${accessToken}`, messageData)
       .then(json => {
         const recipientId = json.recipient_id;

@@ -1,4 +1,4 @@
-class Foo {
+class CatCat {
   constructor(app) {
     const { postHook, getHook } = require('./facebook/hook')
 
@@ -10,4 +10,4 @@ class Foo {
   }
 }
 
-module.exports = Foo
+module.exports = CatCat

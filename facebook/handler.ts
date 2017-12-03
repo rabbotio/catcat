@@ -1,4 +1,4 @@
-const receivedMessage = (event, responder) => {
+const receivedMessage = async (event, foo) => {
   const senderID = event.sender.id;
   const recipientID = event.recipient.id;
   const timeOfMessage = event.timestamp;
@@ -28,18 +28,14 @@ const receivedMessage = (event, responder) => {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    responder.sendTextMessage(senderID, "Quick reply tapped");
-    return;
+    return foo.responder.sendTextMessage(senderID, "Quick reply tapped");
   }
 
   if (messageText) {
-    try {
-      responder.sendTextMessage(senderID, messageText)
-    } catch (err) {
-      responder.sendTextMessage(senderID, 'error')
-    }
+    //return foo.responder.sendTextMessage(senderID, messageText);
+    return foo.reply(senderID, messageText)
   } else if (messageAttachments) {
-    responder.sendTextMessage(senderID, "Message with attachment received");
+    foo.responder.sendTextMessage(senderID, "Message with attachment received");
   } else {
     // hm?
   }
