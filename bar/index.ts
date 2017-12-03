@@ -1,18 +1,23 @@
-const API = `https://min-api.cryptocompare.com/data`
+class Bar {
+  private static API = `https://min-api.cryptocompare.com/data`
 
-const getPrice = async (from: string, to: string) => {
-  const method = 'price'
+  static getPrice = async (from: string, to: string) => {
+    const method = 'price'
 
-  // Upper case
-  from = from.trim().toUpperCase()
-  to = to.trim().toUpperCase()
+    // Upper case
+    from = from.trim().toUpperCase()
+    to = to.trim().toUpperCase()
 
-  // TODO check exist for support symbols
+    // TODO check exist for support symbols
 
-  const { getJSON } = require('../lib/fetcher')
-  const json = await getJSON(`${API}/${method}`).catch(console.error)
-  return `1 ${from} = ${json[to]} ${to}`
+    const { getJSON } = require('../lib/fetcher')
+    const json = await getJSON(`${Bar.API}/${method}`, {
+      fsym: from,
+      tsyms: to,
+    }).catch(console.error)
+
+    return json[to]
+  }
 }
 
-
-module.exports = { getPrice }
+module.exports = Bar

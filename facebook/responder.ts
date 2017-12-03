@@ -3,11 +3,11 @@ class Responder {
   facebookURL = `https://graph.facebook.com/v2.6/me/messages`
   accessToken = null
 
-  constructor(accessToken) {
+  constructor(accessToken: string) {
     this.accessToken = accessToken
   }
 
-  sendTextMessage(recipientId, messageText) {
+  async sendTextMessage(recipientId, messageText) {
     const messageData = {
       recipient: {
         id: recipientId
@@ -17,12 +17,12 @@ class Responder {
       }
     };
 
-    this.callSendAPI(this.accessToken, messageData);
+    return this.callSendAPI(this.accessToken, messageData);
   }
 
-  callSendAPI(accessToken, messageData) {
+  async callSendAPI(accessToken, messageData) {
     const { postJSON } = require('../lib/fetcher')
-    postJSON(`${this.facebookURL}?access_token=${accessToken}`, messageData)
+    return postJSON(`${this.facebookURL}?access_token=${accessToken}`, messageData)
       .then(json => {
         const recipientId = json.recipient_id;
         const messageId = json.message_id;

@@ -1,3 +1,6 @@
+// For webtask bundle
+require('./i18n/en-US')
+
 class Foo {
   _responder: Responder = null
   _UserModel = null
@@ -12,24 +15,29 @@ class Foo {
   }
 
   async reply(senderID: string, messageText: string) {
-    console.log('reply')
+    console.log(`reply [${senderID}] : ${messageText}`)
+
     // Section by current senderID state
-    const { NEW_COMER } = require('../model/user.state')
-    console.log(NEW_COMER)
+    const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
     const user = this._UserModel.find(senderID)
-    console.log(JSON.stringify(user))
 
     switch (user.state) {
-      case NEW_COMER:
-        console.log('Greeting')
-
-        return this._responder.sendTextMessage(senderID, 'Greeting!')
+      // case NEW_COMER:
+      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
       default:
-        console.log('getPrice')
+        console.log(user.state)
+        const from = 'OMG'
+        const to = 'THB'
+        const Bar = require('../bar')
+        const price = await Bar.getPrice(from, to)
+        const { getPrice } = require(`./i18n/en-US`)({
+          from, to, price
+        })
 
-        const { getPrice } = require('../bar')
-        const price = await getPrice('OMG', 'THB')
-        return this._responder.sendTextMessage(senderID, price)
+        console.log(3)
+        console.log(getPrice)
+
+        return this._responder.sendTextMessage(senderID, getPrice)
     }
   }
 }

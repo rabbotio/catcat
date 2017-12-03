@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "test": "jest --watchAll"
   },
   "author": "katopz",
   "license": "MIT",
@@ -14,6 +15,7 @@
     "typescript": "^2.5.2"
   },
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "jest": "^21.2.1"
   }
 }

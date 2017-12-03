@@ -9,7 +9,7 @@
     "serve": "wt serve index.js --secrets-file .env",
     "deploy": "wt create index.js --bundle --secrets-file .env",
     "prod": "npm run build && npm run deploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll"
   },
   "author": "katopz",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "^21.2.1",
     "webtask-tools": "^3.2.0"
   }
 }
