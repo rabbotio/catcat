@@ -8,31 +8,36 @@ class Foo {
   constructor(responder: Responder) {
     this._responder = responder
     this._UserModel = require('../model/user.model')
-
-    // Rules
-
   }
 
   get responder() {
     return this._responder
   }
 
-  async route(senderID: string, userState: string, messageText: string) {
-    switch (userState) {
-      // case NEW_COMER:
-      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
-      default:
-        // TODO : separated by command
+  toCommand(messageText: string) {
+    messageText = messageText.trim()
 
-        const Bar = require('../bar')
-        const validSymbol = await Bar.validateSymbol(messageText)
+    // PRICE
+    if (messageText.includes('$', 0)) {
+      return {
+        method: 'getPrice',
+        params: messageText.substring(1, messageText.length).trim().toUpperCase().split(' ')
+      }
+    }
 
-        if (!validSymbol) return false
+    return null
+  }
 
-        const from = validSymbol
-        const to = 'THB'
+  async run(senderID: string, command) {
 
+    const Bar = require('../bar')
+
+    switch (command.method) {
+      case 'getPrice':
+        const from = command.params[0]
+        const to = command.params[1] || 'THB'
         const price = await Bar.getPrice(from, to)
+
         const { getPrice } = require(`./i18n/en-US`)({
           from, to, price
         })
@@ -41,14 +46,24 @@ class Foo {
     }
   }
 
+  route(userState: string, messageText: string) {
+    // const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
+    switch (userState) {
+      // case NEW_COMER:
+      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
+      default:
+        return this.toCommand(messageText)
+    }
+  }
+
   async reply(senderID: string, messageText: string) {
     console.log(`🤖 reply [${senderID}] : ${messageText}`)
 
     // Section by current senderID state
-    const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
     const user = this._UserModel.find(senderID)
+    const command = this.route(user.state, messageText)
 
-    return this.route(senderID, user.state, messageText)
+    return this.run(senderID, command)
   }
 }
 

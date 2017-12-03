@@ -2,12 +2,20 @@
 CatCat Chatbot is here to help you securely transfer your coins
 
 ## Features
+- [x] Can check current coins exchange rate.
 - [ ] Can transfer coins at lowest rate or fastest time use.
 - [ ] Can schedule transfer w/ or w/o multisig.
 - [ ] Can create wallet and bind it with Facebook user.
 
 ## Foo
 Will handle chat related
+- [x] `$omg`             // To get `OMG` price in `THB`.
+- [x] `$omg eth`         // To get `OMG` price in `ETH`.
+- [ ] `-omg 100 @katopz` // To send 100 `OMG` to user name `@katopz`.
+- [ ] `+omg 100 @katopz` // To ask for 100 `OMG` from user name `@katopz`.
+- [ ] `#omg`             // To see `OMG` trend.
+- [ ] `!omg>5%`          // To alert when `OMG` price up `5%`.
+- [ ] `!omg<5%`          // To alert when `OMG` price down `5%`.
 
 ## Bar
 Will handle coins related
