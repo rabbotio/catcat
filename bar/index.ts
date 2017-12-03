@@ -1,5 +1,6 @@
 class Bar {
   private static API = `https://min-api.cryptocompare.com/data`
+  private static coins = []
 
   static getPrice = async (from: string, to: string) => {
     const method = 'price'
@@ -17,6 +18,16 @@ class Bar {
     }).catch(console.error)
 
     return json[to]
+  }
+
+  static validateSymbol = async (symbol: string) => {
+    const { getJSON } = require('../lib/fetcher')
+    const json = await getJSON(`${Bar.API}/all/coinlist`)
+    Bar.coins = Object.keys(json.Data)
+
+    symbol = symbol.toUpperCase().trim()
+
+    return Bar.coins.includes(symbol) ? symbol : null
   }
 }
 

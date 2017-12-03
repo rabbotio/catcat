@@ -37,7 +37,7 @@ Will handle coins related
 - [ ] Can create ethereum wallet
 - [ ] Can send mail about wallet and secret
 
-# v1
+## v1
 - [ ] Can create bitcoin wallet
 
 ## v2

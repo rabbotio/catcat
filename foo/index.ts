@@ -8,10 +8,37 @@ class Foo {
   constructor(responder: Responder) {
     this._responder = responder
     this._UserModel = require('../model/user.model')
+
+    // Rules
+
   }
 
   get responder() {
     return this._responder
+  }
+
+  async route(senderID: string, userState: string, messageText: string) {
+    switch (userState) {
+      // case NEW_COMER:
+      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
+      default:
+        // TODO : separated by command
+
+        const Bar = require('../bar')
+        const validSymbol = await Bar.validateSymbol(messageText)
+
+        if (!validSymbol) return false
+
+        const from = validSymbol
+        const to = 'THB'
+
+        const price = await Bar.getPrice(from, to)
+        const { getPrice } = require(`./i18n/en-US`)({
+          from, to, price
+        })
+
+        return this._responder.sendTextMessage(senderID, getPrice)
+    }
   }
 
   async reply(senderID: string, messageText: string) {
@@ -21,20 +48,7 @@ class Foo {
     const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
     const user = this._UserModel.find(senderID)
 
-    switch (user.state) {
-      // case NEW_COMER:
-      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
-      default:
-        const from = 'OMG'
-        const to = 'THB'
-        const Bar = require('../bar')
-        const price = await Bar.getPrice(from, to)
-        const { getPrice } = require(`./i18n/en-US`)({
-          from, to, price
-        })
-
-        return this._responder.sendTextMessage(senderID, getPrice)
-    }
+    return this.route(senderID, user.state, messageText)
   }
 }
 
