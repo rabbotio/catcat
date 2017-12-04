@@ -1,3 +1,3 @@
 module.exports = (params) => ({
-  getPrice: `1 ${params.from} = ${params.price} ${params.to}`
+  getPrice: `1 ${params.from} = ${Number(params.price).toLocaleString(params.locale)} ${params.to}`
 })

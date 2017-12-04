@@ -1,5 +1,5 @@
-// For webtask bundle
-require('./i18n/en-US')
+// for webtask
+const __localeList = { 'en-US': require('./i18n/en-US') }
 
 class Foo {
   _responder: Responder = null
@@ -28,7 +28,7 @@ class Foo {
     return null
   }
 
-  async run(senderID: string, command) {
+  async run(senderID: string, command, locale: string = 'en-US') {
 
     const Bar = require('../bar')
 
@@ -38,8 +38,8 @@ class Foo {
         const to = command.params[1] || 'THB'
         const price = await Bar.getPrice(from, to)
 
-        const { getPrice } = require(`./i18n/en-US`)({
-          from, to, price
+        const { getPrice } = __localeList[locale]({
+          from, to, price, locale
         })
 
         return this._responder.sendTextMessage(senderID, getPrice)
@@ -62,8 +62,9 @@ class Foo {
     // Section by current senderID state
     const user = this._UserModel.find(senderID)
     const command = this.route(user.state, messageText)
+    const locale = user.locale
 
-    return this.run(senderID, command)
+    return this.run(senderID, command, locale)
   }
 }
 
