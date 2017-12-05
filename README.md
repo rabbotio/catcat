@@ -11,6 +11,7 @@ CatCat Chatbot is here to help you securely transfer your coins
 Will handle chat related
 - [x] `$omg`             // To get `OMG` price in `THB`.
 - [x] `$omg eth`         // To get `OMG` price in `ETH`.
+- [ ] `.`                // To repeat last command.
 - [ ] `-omg 100 @katopz` // To send 100 `OMG` to user name `@katopz`.
 - [ ] `+omg 100 @katopz` // To ask for 100 `OMG` from user name `@katopz`.
 - [ ] `#omg`             // To see `OMG` trend.
