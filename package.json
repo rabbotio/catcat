@@ -1,5 +1,5 @@
 {
-  "name": "foo",
+  "name": "catcat",
   "version": "0.2.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,9 @@
     "serve": "wt serve index.js --secrets-file .env",
     "deploy": "wt create index.js --bundle --secrets-file .env",
     "prod": "npm run build && npm run deploy",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "docker-build-tsc": "cd scripts/tsc && docker build -t tsc:latest . && docker image ls tsc",
+    "docker-build": "docker build -t catcat:latest . && docker image ls catcat"
   },
   "author": "katopz",
   "license": "MIT",
@@ -35,7 +37,7 @@
       "js"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>/scripts/preprocessor.js"
     },
     "testMatch": [
       "**/__tests__/*.test.ts"
