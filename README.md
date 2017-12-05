@@ -12,6 +12,7 @@ Will handle chat related
 - [x] `$omg`             // To get `OMG` price in `THB`.
 - [x] `$omg eth`         // To get `OMG` price in `ETH`.
 - [ ] `.`                // To repeat last command.
+- [ ] `?`                // To ask for help.
 - [ ] `-omg 100 @katopz` // To send 100 `OMG` to user name `@katopz`.
 - [ ] `+omg 100 @katopz` // To ask for 100 `OMG` from user name `@katopz`.
 - [ ] `#omg`             // To see `OMG` trend.

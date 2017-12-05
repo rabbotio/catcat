@@ -14,25 +14,19 @@ class Foo {
     return this._responder
   }
 
-  toCommand(messageText: string) {
-    messageText = messageText.trim()
-
-    // PRICE
-    if (messageText.includes('$', 0)) {
-      return {
-        method: 'getPrice',
-        params: messageText.substring(1, messageText.length).trim().toUpperCase().split(' ')
-      }
-    }
-
-    return null
+  storeCommand(user: User, command: Command): void {
+    // Keep command for repeat later
+    user.pushCommand(command)
   }
 
-  async run(senderID: string, command, locale: string = 'en-US') {
-
+  async run(user: User, command: Command, locale: string = 'en-US') {
     const Bar = require('../bar')
 
-    switch (command.method) {
+    // No command
+    const method = command ? command.method : { method: null }
+
+    switch (method) {
+
       case 'getPrice':
         const from = command.params[0]
         const to = command.params[1] || 'THB'
@@ -42,29 +36,42 @@ class Foo {
           from, to, price, locale
         })
 
-        return this._responder.sendTextMessage(senderID, getPrice)
+        this.storeCommand(user, command)
+
+        return getPrice
+
+      default:
+        // Not a command 
+        return 'Hmm?'
     }
   }
 
-  route(userState: string, messageText: string) {
+  route(userState: string, messageText: string): Command {
     // const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
     switch (userState) {
       // case NEW_COMER:
       //  return this._responder.sendTextMessage(senderID, 'Greeting!')
       default:
-        return this.toCommand(messageText)
+        const { toCommand } = require('./parser')
+
+        return toCommand(messageText)
     }
   }
 
   async reply(senderID: string, messageText: string) {
-    console.log(`🤖 reply [${senderID}] : ${messageText}`)
-
     // Section by current senderID state
     const user = this._UserModel.find(senderID)
-    const command = this.route(user.state, messageText)
-    const locale = user.locale
+    let command = this.route(user.state, messageText)
 
-    return this.run(senderID, command, locale)
+    // Repeat?
+    if (command.method === 'repeat') command = user.lastCommand
+
+    // Run command 
+    const answer = await this.run(user, command)
+
+    // Reply
+    console.log(`🤖 reply [${senderID}] : ${answer}`)
+    return this._responder.sendTextMessage(senderID, answer)
   }
 }
 

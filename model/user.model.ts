@@ -1,10 +1,11 @@
 class UserModel {
   // TODO : read from storage
-  private static _users = { '2238896416126713': new (require('./user'))() }
+  private static senderId = '2238896416126713'
+  private static _users = { [UserModel.senderId]: new (require('./user'))(UserModel.senderId) }
 
   static upsert(id) {
     const User = require('./user')
-    this._users[id] = new User()
+    this._users[id] = new User(id)
   }
 
   static find(id) {
