@@ -42,4 +42,4 @@ const receivedMessage = async (event, foo) => {
   }
 }
 
-module.exports = { receivedMessage }
+export default { receivedMessage }

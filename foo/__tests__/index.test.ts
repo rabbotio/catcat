@@ -1,13 +1,13 @@
 /* eslint-env jest */
-describe('Foo', () => {
-  // Bar
-  const Bar = require('../../bar')
+import KVStorage from '../../model/KVStorage'
+import Foo from '../../foo'
+import Bar from '../../bar'
+import Responder from '../__mocks__/responder'
 
-  // Foo
-  const Foo = require('../index')
-  const Responder = require('../__mocks__/responder')
-  const responder = new Responder()
-  const foo = new Foo(responder)
+describe('Foo', () => {
+  const kvStorage = new KVStorage()
+  const responder = new Responder('')
+  const foo = new Foo(kvStorage, responder)
 
   // Sender
   const senderId = '2238896416126713'

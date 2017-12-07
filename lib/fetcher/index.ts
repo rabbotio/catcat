@@ -21,4 +21,4 @@ const postJSON = (uri, body = {}) =>
 const getJSON = (uri, body = {}) =>
   fetch(`${uri}?${jsonToQueryString(body)}`).then(handleResponseError)
 
-module.exports = { postJSON, getJSON }
+export = { postJSON, getJSON }

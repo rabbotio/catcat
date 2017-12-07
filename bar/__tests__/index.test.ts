@@ -1,8 +1,8 @@
 /* eslint-env jest */
+import Bar from '../'
+
 describe('Bar', () => {
   it('can get price', async () => {
-    const Bar = require('../')
-
     const from = 'OMG'
     const to = 'THB'
 

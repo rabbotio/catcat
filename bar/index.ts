@@ -1,3 +1,5 @@
+require('../lib/pre')
+import { getJSON } from '../lib/fetcher'
 class Bar {
   private static API = `https://min-api.cryptocompare.com/data`
 
@@ -10,7 +12,6 @@ class Bar {
 
     // TODO check exist for support symbols
 
-    const { getJSON } = require('../lib/fetcher')
     const json = await getJSON(`${Bar.API}/${method}`, {
       fsym: from,
       tsyms: to,
@@ -20,4 +21,4 @@ class Bar {
   }
 }
 
-module.exports = Bar
+export default Bar

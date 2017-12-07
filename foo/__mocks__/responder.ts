@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const BaseResponder = require('../../facebook/responder')
+import BaseResponder from '../../facebook/responder'
 
 class MockResponder extends BaseResponder {
   async callSendAPI(accessToken, messageData) {
@@ -7,4 +7,4 @@ class MockResponder extends BaseResponder {
   }
 }
 
-module.exports = MockResponder
+export default MockResponder

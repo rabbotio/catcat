@@ -10,4 +10,4 @@ class CatCat {
   }
 }
 
-module.exports = CatCat
+export default CatCat

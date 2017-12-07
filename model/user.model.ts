@@ -1,16 +1,34 @@
+import KVStorage from './KVStorage'
+import User from './user'
 class UserModel {
-  // TODO : read from storage
-  private static senderId = '2238896416126713'
-  private static _users = { [UserModel.senderId]: new (require('./user'))(UserModel.senderId) }
+  private _kvStorage: KVStorage = null
 
-  static upsert(id) {
-    const User = require('./user')
-    this._users[id] = new User(id)
+  constructor(kvStorage) {
+    this._kvStorage = kvStorage
+
+    // seed
+    this.upsert('2238896416126713')
   }
 
-  static find(id) {
-    return this._users[id]
+  async upsert(id) {
+    const user = new User(id)
+    await this._kvStorage.setItem(id, user)
+  }
+
+  async find(id) {
+    return this._kvStorage.getItem(id)
+  }
+
+  async getCommands(id) {
+    return this.find(id)['commands']
+  }
+
+  async pushCommand(commands: any[], command: Command) {
+    console.log('pushCommand:', command)
+    // Limit to last 3 commands
+    if (commands.length >= 2) commands.unshift()
+    return commands.push(command)
   }
 }
 
-module.exports = UserModel
+export default UserModel

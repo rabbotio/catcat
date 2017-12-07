@@ -9,4 +9,4 @@ app.get('/', (req, res) => res.send('Hi!'))
 require('./catcat')(app)
 
 // Start server
-module.exports = require('webtask-tools').fromExpress(app)
+export default require('webtask-tools').fromExpress(app)

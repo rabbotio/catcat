@@ -41,4 +41,4 @@ class Responder {
   }
 }
 
-module.exports = Responder
+export default Responder

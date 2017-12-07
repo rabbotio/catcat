@@ -1,21 +1,40 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "experimentalDecorators": true,
+    "noEmitOnError": false,
+    "module": "commonjs",
     "moduleResolution": "node",
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "skipDefaultLibCheck": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "jsx": "react",
     "lib": [
+      "es5",
+      "es6",
       "dom",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.generator",
+      "es2015.iterable",
       "es2015.promise",
-      "es7"
-    ],
-    "types": [
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
+      "es2015.proxy",
+      "es2015.reflect",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "esnext.asynciterable"
     ]
   },
-  "compileOnSave": true,
   "exclude": [
-    "*/__tests__"
+    "lib/fetcher/node_modules",
+    "lib/fetcher/node_modules/**",
+    "node_modules",
+    "node_modules/**",
+    "dist",
+    ".next",
+    "bin",
+    "components/common"
   ]
 }
