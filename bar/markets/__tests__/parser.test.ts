@@ -1,12 +1,13 @@
 /* eslint-env jest */
-import Bar from '../'
+import Parser from '../parser'
+const data = require('../__mocks__/bx.price.json')
 
-describe('Bar', () => {
-  it('can get price', async () => {
+describe('Parser', () => {
+  it('can parser price from bx', async () => {
     const from = 'OMG'
     const to = 'THB'
 
-    const json = await Bar.getPrice(from, to)
+    const json = Parser.parseBX(data)
     expect(json[`${from}_${to}`]).toMatchObject({
       price: expect.any(Number),
       change: expect.any(Number),

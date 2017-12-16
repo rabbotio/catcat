@@ -34,13 +34,18 @@ class Foo {
   async run(user: User, command: Command, locale: string = 'en-US') {
     // No command
     const method = command ? command.method : { method: null }
+    let errorMessageText
 
     switch (method) {
-
       case 'getPrice':
         const from = command.params[0]
         const to = command.params[1] || 'THB'
-        const price = await Bar.getPrice(from, to)
+        const price = await Bar.getPrice(from, to).catch(err => errorMessageText = err.messageText)
+
+        // Handle error
+        if (!price) {
+          return errorMessageText || `Sorry! Can't get ${from} price`
+        }
 
         const { getPrice } = __localeList[locale]({
           from, to, price, locale
