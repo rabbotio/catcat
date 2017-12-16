@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "tsc -w",
     "serve": "wt serve index.js --secrets-file .env",
-    "deploy": "wt create index.js --bundle --secrets-file .env",
+    "deploy": "npm run build && wt create index.js --bundle --secrets-file .env",
     "prod": "npm run build && npm run deploy",
     "test": "jest --watchAll",
     "docker-build-tsc": "cd scripts/tsc && docker build -t tsc:latest . && docker image ls tsc",

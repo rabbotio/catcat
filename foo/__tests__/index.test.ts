@@ -7,7 +7,8 @@ describe('Foo', () => {
   const Foo = require('../index')
   const Responder = require('../__mocks__/responder')
   const responder = new Responder()
-  const foo = new Foo(responder)
+  const KVStorage = require('../../model/KVStorage')
+  const foo = new Foo(new KVStorage(), responder)
 
   // Sender
   const senderId = '2238896416126713'
@@ -18,7 +19,7 @@ describe('Foo', () => {
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
       message: {
-        text: `Hmm?`
+        text: `What?`
       }
     })
   })

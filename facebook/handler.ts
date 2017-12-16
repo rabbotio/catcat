@@ -33,7 +33,11 @@ const receivedMessage = async (event, foo) => {
 
   if (messageText) {
     //return foo.responder.sendTextMessage(senderID, messageText);
-    await foo.reply(senderID, messageText).catch(err => this._responder.sendTextMessage(senderID, err.message))
+    console.log('Will reply...')
+    await foo.reply(senderID, messageText).catch(err => {
+      console.error(err)
+      foo.responder.sendTextMessage(senderID, err.message)
+    })
     return
   } else if (messageAttachments) {
     foo.responder.sendTextMessage(senderID, "Message with attachment received");

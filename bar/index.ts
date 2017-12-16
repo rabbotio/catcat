@@ -1,5 +1,5 @@
 class Bar {
-  private static API = `https://min-api.cryptocompare.com/data`
+  private static API = `https://bx.in.th/api/`
 
   static getPrice = async (from: string, to: string) => {
     const method = 'price'
@@ -8,15 +8,12 @@ class Bar {
     from = from.trim().toUpperCase()
     to = to.trim().toUpperCase()
 
-    // TODO check exist for support symbols
-
+    // TODO check exist for supported symbols
     const { getJSON } = require('../lib/fetcher')
-    const json = await getJSON(`${Bar.API}/${method}`, {
-      fsym: from,
-      tsyms: to,
-    }).catch(console.error)
-
-    return json[to]
+    const { parseBX } = require('./markets/MarketAdapter')
+    const json = await getJSON(`${Bar.API}`)
+    const result = parseBX(json)
+    return result[`${from}_${to}`].price
   }
 }
 

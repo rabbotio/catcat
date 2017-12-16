@@ -6,7 +6,7 @@ describe('Bar', () => {
     const from = 'OMG'
     const to = 'THB'
 
-    const result = await Bar.getPrice(from, to)
-    expect(result).toEqual(expect.any(Number))
+    const price = await Bar.getPrice(from, to)
+    expect(price).toEqual(expect.any(Number))
   })
 })
