@@ -1,4 +1,7 @@
 const postHook = (req, res) => {
+  // KVStorage
+  const { storage } = req.webtaskContext
+
   // Responder
   const { ACCESS_TOKEN } = req.webtaskContext.secrets
   const Responder = require('./responder')
@@ -6,7 +9,7 @@ const postHook = (req, res) => {
 
   // Handler
   const Foo = require('../foo')
-  const foo = new Foo(responder)
+  const foo = new Foo(storage, responder)
   const { receivedMessage } = require('./handler')
   const data = req.body;
 

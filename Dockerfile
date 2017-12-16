@@ -28,7 +28,6 @@ WORKDIR /usr/app/
 
 # Source
 COPY --from=builder /usr/app .
-RUN ls .
 
 # HTTP port, default to 3000
 EXPOSE $PORT
