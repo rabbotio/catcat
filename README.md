@@ -6,18 +6,67 @@ CatCat Chatbot is here to help you securely transfer your coins
 - [ ] Can transfer coins at lowest rate or fastest time use.
 - [ ] Can schedule transfer w/ or w/o multisig.
 - [ ] Can create wallet and bind it with Facebook user.
+- [ ] Can give information about coin.
 
 ## Foo
 Will handle chat related
+### Price
 - [x] `$omg`             // To get `OMG` price in `THB`.
 - [x] `$omg eth`         // To get `OMG` price in `ETH`.
-- [ ] `.`                // To repeat last command.
+- [ ] `$`                // To repeat last `$` command.
+
+### Help
 - [ ] `?`                // To ask for help.
-- [ ] `-omg 100 @katopz` // To send 100 `OMG` to user name `@katopz`.
-- [ ] `+omg 100 @katopz` // To ask for 100 `OMG` from user name `@katopz`.
-- [ ] `#omg`             // To see `OMG` trend.
-- [ ] `!omg>5%`          // To alert when `OMG` price up `5%`.
-- [ ] `!omg<5%`          // To alert when `OMG` price down `5%`.
+- [ ] `?$`               // To ask for help about `$`.
+- [ ] `?#`               // To ask for help about `#`.
+- [ ] `?-`               // To ask for help about `-`.
+- [ ] `?+`               // To ask for help about `+`.
+- [ ] `?!`               // To ask for help about `!`.
+- [ ] `?~`               // To ask for help about `~`.
+- [ ] `?^`               // To ask for help about `^`.
+- [ ] `?omg`             // To ask for information about `OMG`.
+
+### Send
+- [ ] `-100 omg @katopz` // To send `100` as `OMG` to user name `@katopz`.
+- [ ] `-`                // To repeat last `-` command with prompt for `to` targeted user.
+- [ ] `-omg`             // To send `OMG` with prompt for `value` then `to` targeted user.
+- [ ] `-100 omg`         // To send `100` as `OMG` with prompt for `to` targeted user.
+
+### Receive
+- [ ] `+100 omg @katopz` // To ask for `100` as `OMG` from user name `@katopz`.
+- [ ] `+`                // To repeat last `+` command with prompt for `to` targeted user.
+- [ ] `+omg`             // To send `OMG` with prompt for `value` then `to` targeted user.
+- [ ] `+100 omg`         // To send `100` as `OMG` with prompt for `to` targeted user.
+
+### Chart
+- [ ] `#omg`             // To see `OMG` chart.
+- [ ] `#`                // To repeat last `#` command.
+- [ ] `#omg xzc`         // To see `OMG` chart against `XZC`.
+
+### Forecast
+- [ ] `~omg`             // To get forecast about `OMG`.
+- [ ] `~`                // To repeat last `~` command.
+
+### Profit
+- [ ] `^omg`             // To prompt for `value` as `OMG` and show profit as `%`.
+- [ ] `^omg%`            // To prompt for `value` as `OMG` and show profit as `%`.
+- [ ] `^omg thb`         // To prompt for `value` as `OMG` and show profit as `thb`.
+- [ ] `^`                // Show all profit gain.
+
+### News
+- [ ] `*omg`             // To get news about `OMG`
+- [ ] `*`                // To repeat last `*` command.
+
+### Alert
+- [ ] `!omg>5%`          // To alert when `OMG` price up `5%` from now.
+- [ ] `!omg<5%`          // To alert when `OMG` price down `5%` from now.
+- [ ] `!omg<300`         // To alert when `OMG` price less then `300`.
+- [ ] `!omg>300`         // To alert when `OMG` price more then `300`.
+- [ ] `!`                // To repeat last `!` command.
+
+### Market
+- [ ] `%`                // To show market for select
+- [ ] `%bitfinex`        // To select `bitfinex`
 
 ## Bar
 Will handle coins related
@@ -27,8 +76,7 @@ Will handle coins related
 - [ ] Can prompt for `CHECK_PRICE`, `SEND_COINS`, `WATCH_PRICE`
 
 ### CHECK_PRICE state
-- [ ] Can invite user for price by ticker.
-- [ ] Can check price by ticker.
+- [ ] Can check price by symbol.
 
 ### SEND_COINS state
 - [ ] Can send ethereum by address
@@ -38,10 +86,6 @@ Will handle coins related
 - [ ] Can notify when transfer failed
 - [ ] Can retry or cancel when transfer failed
 - [ ] Can prompt for next action after transfer  
-
-### WATCH_PRICE state
-- [ ] Can trigger when less than lower bound.
-- [ ] Can trigger when less than higher bound.
 
 ## beta
 - [ ] Can create ethereum wallet
