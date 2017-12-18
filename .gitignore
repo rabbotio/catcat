@@ -23,7 +23,7 @@ yarn-error.log*
 
 foo/**/*.js
 bar/**/*.js
-facebook/**/*.js
+provider/**/*.js
 model/**/*.js
 lib/**/*.js
 *.js

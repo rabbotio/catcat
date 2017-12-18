@@ -1,6 +1,6 @@
 class CatCat {
   constructor(app) {
-    const { postHook, getHook } = require('./facebook/hook')
+    const { postHook, getHook } = require('./providers/facebook/hook')
 
     // Accepts POST requests at /webhook endpoint
     app.post('/webhook', postHook)
