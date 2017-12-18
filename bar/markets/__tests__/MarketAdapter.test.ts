@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const data = require('../__mocks__/bx.price.json')
 
-describe('Parser', () => {
+describe('MarketAdapter', () => {
   it('can parser price from bx', async () => {
     const from = 'OMG'
     const to = 'THB'
@@ -12,16 +12,12 @@ describe('Parser', () => {
       price: expect.any(Number),
       change: expect.any(Number),
       volume: expect.any(Number),
-      bids: {
-        total: expect.any(Number),
-        volume: expect.any(Number),
-        highbid: expect.any(Number)
-      },
-      asks: {
-        total: expect.any(Number),
-        volume: expect.any(Number),
-        highbid: expect.any(Number)
-      }
+      bid_total: expect.any(Number),
+      bid_volume: expect.any(Number),
+      bid_highest: expect.any(Number),
+      ask_total: expect.any(Number),
+      ask_volume: expect.any(Number),
+      ask_highest: expect.any(Number)
     })
   })
 })
