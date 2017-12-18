@@ -1,5 +1,7 @@
 class WTServer {
-  _initApp () {
+  private _app = null
+
+  _initApp() {
     // Express
     const express = require('express')
     const app = express()
@@ -20,11 +22,11 @@ class WTServer {
     return app
   }
 
-  constructor () {
+  constructor() {
     this._app = this._initApp()
   }
 
-  get app () {
+  get app() {
     return this._app
   }
 }

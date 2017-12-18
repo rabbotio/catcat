@@ -25,7 +25,5 @@ foo/**/*.js
 bar/**/*.js
 facebook/**/*.js
 model/**/*.js
-lib/fetcher/*.js
-catcat.js
-index.js
-KVWTStorage.js
+lib/**/*.js
+*.js
