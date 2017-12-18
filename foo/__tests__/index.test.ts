@@ -1,13 +1,14 @@
 /* eslint-env jest */
-import KVStorage from '../../model/KVStorage'
-import Foo from '../../foo'
-import Bar from '../../bar'
-import Responder from '../__mocks__/responder'
-
 describe('Foo', () => {
-  const kvStorage = new KVStorage()
-  const responder = new Responder('')
-  const foo = new Foo(kvStorage, responder)
+  // Bar
+  const Bar = require('../../bar')
+
+  // Foo
+  const Foo = require('../index')
+  const Responder = require('../__mocks__/responder')
+  const responder = new Responder()
+  const KVStorage = require('../../model/KVStorage')
+  const foo = new Foo(new KVStorage(), responder)
 
   // Sender
   const senderId = '2238896416126713'
@@ -18,7 +19,7 @@ describe('Foo', () => {
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
       message: {
-        text: `Hmm?`
+        text: `What?`
       }
     })
   })

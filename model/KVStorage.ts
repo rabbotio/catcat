@@ -11,4 +11,4 @@ class KVStorage {
   }
 }
 
-export default KVStorage
+module.exports = KVStorage

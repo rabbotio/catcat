@@ -1,7 +1,3 @@
-require('../lib/pre')
-import { getJSON } from '../lib/fetcher'
-import Parser from './markets/parser'
-
 class Bar {
   private static API = `https://bx.in.th/api/`
 
@@ -13,13 +9,12 @@ class Bar {
     to = to.trim().toUpperCase()
 
     // TODO check exist for supported symbols
-
+    const { getJSON } = require('../lib/fetcher')
+    const { parseBX } = require('./markets/MarketAdapter')
     const json = await getJSON(`${Bar.API}`)
-    const result = Parser.parseBX(json)
-    console.log('🤖 : ', result)
-
-    return result.price
+    const result = parseBX(json)
+    return result[`${from}_${to}`].price
   }
 }
 
-export default Bar
+module.exports = Bar

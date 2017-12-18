@@ -1,12 +1,13 @@
 /* eslint-env jest */
+const data = require('../__mocks__/bx.price.json')
+
 describe('Parser', () => {
   it('can parser price from bx', async () => {
     const from = 'OMG'
     const to = 'THB'
 
-    const MarketAdapter = require('../MarketAdapter')
-    const data = require('../__mocks__/bx.price.json')
-    const json = MarketAdapter.parseBX(data)
+    const { parseBX } = require('../MarketAdapter')
+    const json = parseBX(data)
     expect(json[`${from}_${to}`]).toMatchObject({
       price: expect.any(Number),
       change: expect.any(Number),

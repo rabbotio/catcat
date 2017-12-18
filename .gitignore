@@ -28,3 +28,4 @@ model/**/*.js
 lib/fetcher/*.js
 catcat.js
 index.js
+KVWTStorage.js

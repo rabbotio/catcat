@@ -9,7 +9,7 @@ if (!Object.entries)
     return resArray;
   };
 
-class Parser {
+class MarketAdapter {
   static parseBX(data): any {
     let result = {}
     const map = new Map(Object.entries(data))
@@ -27,4 +27,4 @@ class Parser {
   }
 }
 
-module.exports = Parser
+module.exports = MarketAdapter

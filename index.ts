@@ -6,7 +6,8 @@ const { app } = new (require('./lib/WTServer'))()
 app.get('/', (req, res) => res.send('Hi!'))
 
 // Start app
-require('./catcat')(app)
+const _CatCat = require('./catcat')
+const catcat = new _CatCat(app)
 
 // Start server
-export default require('webtask-tools').fromExpress(app)
+module.exports = require('webtask-tools').fromExpress(app)

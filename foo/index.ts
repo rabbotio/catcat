@@ -1,16 +1,5 @@
 // for webtask
-const __localeList = { 'en-US': require('./i18n/en-US').default }
-
-// Pre
-require('../lib/pre')
-
-import KVStorage from '../model/KVStorage'
-import UserModel from '../model/user.model'
-import User from '../model/user'
-import Responder from '../facebook/responder'
-import Bar from '../bar'
-
-import { toCommand } from './parser'
+const __localeList = { 'en-US': require('./i18n/en-US') }
 
 class Foo {
   private _kvStorage: KVStorage = null
@@ -20,6 +9,7 @@ class Foo {
   constructor(kvStorage: KVStorage, responder: Responder) {
     this._kvStorage = kvStorage
     this._responder = responder
+    const UserModel = require('../model/user.model')
     this._userModel = new UserModel(kvStorage)
   }
 
@@ -40,7 +30,11 @@ class Foo {
       case 'getPrice':
         const from = command.params[0]
         const to = command.params[1] || 'THB'
-        const price = await Bar.getPrice(from, to).catch(err => errorMessageText = err.messageText)
+        const Bar = require('../bar')
+        const price = await Bar.getPrice(from, to).catch(err => {
+          console.error(err)
+          errorMessageText = err.messageText
+        })
 
         // Handle error
         if (!price) {
@@ -51,13 +45,13 @@ class Foo {
           from, to, price, locale
         })
 
-        this._userModel.pushCommand(user.commands, command)
+        await this._userModel.addCommand(user.senderID, command)
 
         return getPrice
 
       default:
         // Not a command 
-        return 'Hmm?'
+        return 'What?'
     }
   }
 
@@ -67,6 +61,7 @@ class Foo {
       // case NEW_COMER:
       //  return this._responder.sendTextMessage(senderID, 'Greeting!')
       default:
+        const { toCommand } = require('./parser')
         return toCommand(messageText)
     }
   }
@@ -77,9 +72,9 @@ class Foo {
     let command = this.route(user.state, messageText)
 
     // Repeat?
-    if (command.method === 'repeat') command = user.lastCommand
+    if (command.method === 'repeat') command = (user.commands && user.commands[0]) || command
 
-    // Run command 
+    // Run command
     const answer = await this.run(user, command)
 
     // Reply
@@ -88,4 +83,4 @@ class Foo {
   }
 }
 
-export default Foo
+module.exports = Foo

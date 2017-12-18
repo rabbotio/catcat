@@ -1,6 +1,8 @@
 const postHook = (req, res) => {
   // KVStorage
   const { storage } = req.webtaskContext
+  const KVWTStorage = require('../lib/KVWTStorage')
+  const kvStorage = new KVWTStorage(storage)
 
   // Responder
   const { ACCESS_TOKEN } = req.webtaskContext.secrets
@@ -9,7 +11,7 @@ const postHook = (req, res) => {
 
   // Handler
   const Foo = require('../foo')
-  const foo = new Foo(storage, responder)
+  const foo = new Foo(kvStorage, responder)
   const { receivedMessage } = require('./handler')
   const data = req.body;
 
@@ -77,4 +79,4 @@ const getHook = (req, res) => {
   }
 }
 
-export default { postHook, getHook }
+module.exports = { postHook, getHook }

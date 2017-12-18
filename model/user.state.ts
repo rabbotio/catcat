@@ -5,4 +5,4 @@ class UserState {
   static WATCH_PRICE = `WATCH_PRICE`
 }
 
-export default UserState
+module.exports = UserState
