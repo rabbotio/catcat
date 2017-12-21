@@ -47,11 +47,16 @@ Will handle chat related
 - [ ] `~omg`             // To get forecast about `OMG`.
 - [ ] `~`                // To repeat last `~` command.
 
-### Profit
-- [ ] `^omg`             // To prompt for `value` as `OMG` and show profit as `%`.
-- [ ] `^omg%`            // To prompt for `value` as `OMG` and show profit as `%`.
-- [ ] `^omg thb`         // To prompt for `value` as `OMG` and show profit as `thb`.
-- [ ] `^`                // Show all profit gain.
+### Portfolio
+- [ ] `^omg`                // To prompt for `value` as `OMG` and show profit as `%`.
+- [ ] `^omg%`               // To prompt for `value` as `OMG` and show profit as `%`.
+- [ ] `^omg thb`            // To prompt for `value` as `OMG` and show profit as `thb`.
+- [ ] `^+100 omg`           // To prompt for `price` and `100 OMG` then add it to port.
+- [ ] `^+100 omg:123`       // To `100 OMG`at `123 THB` to port and show total.
+- [ ] `^+100 omg:123 THB`   // To `100 OMG`at `123 THB` to port and show total.
+- [ ] `^-100 omg:345 THB`   // To `100 OMG`at `345 THB` to port and show profit as `%`.
+- [ ] `^bx.csv`             // To prompt for choose `bx-*.csv` file from `bx` and show total.
+- [ ] `^`                   // Show all profit gain.
 
 ### News
 - [ ] `*omg`             // To get news about `OMG`
