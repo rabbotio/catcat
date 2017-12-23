@@ -1,6 +1,7 @@
 class User {
   senderID: string
   commands: any[]
+  symbols: IPortfolio[]
   state: string = null
 
   constructor(senderID: string) {

@@ -1,5 +1,7 @@
 /* eslint-env jest */
 describe('Foo', () => {
+  const __localeList = { 'en-US': require('../i18n/en-US') }
+
   // Bar
   const Bar = require('../../bar')
 
@@ -96,6 +98,35 @@ describe('Foo', () => {
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
       message: { text: `1 OMG = ${Number(price).toLocaleString('USD')} USD` }
+    })
+  })
+
+  it('can add portfolio', async () => {
+    // Mock current price
+    let currentPrice = 500
+    Bar.getPrice = jest.fn()
+      .mockImplementationOnce(async () => currentPrice)
+      .mockImplementationOnce(async () => currentPrice)
+
+    const invest = 100 * 1
+    const price = invest / 1
+    const profit = currentPrice - price
+    const amount = 1
+    const symbolId = 'OMG'
+
+    // Try with 1 omg at 100 thb
+    let result = await foo.reply(senderId, `^+1 ${symbolId} 100 thb`)
+
+    const locale = 'en-US'
+    const { getPortfolio } = __localeList[locale]({
+      symbolId, amount, profit, locale
+    })
+
+    expect(result).toMatchObject({
+      recipient: { id: senderId },
+      message: {
+        text: getPortfolio
+      }
     })
   })
 })  

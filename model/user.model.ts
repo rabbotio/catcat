@@ -35,6 +35,59 @@ class UserModel {
     // Save
     return this._kvStorage.setItem(id, user)
   }
+
+  // `^+100 omg 123 thb`   // To `100 OMG`at `123 THB` to port and show summary.
+  async addPortfolio(id: string, amount: number, symbolId: string, price: number, baseSymbolId: string = 'thb') {
+    const user = await this.find(id)
+    user.portfolios = user.portfolios || []
+    user.portfolios.push({
+      symbolId,
+      amount: Number(amount),
+      price: Number(price),
+    })
+
+    return this.getPortfolio(id, symbolId, baseSymbolId)
+  }
+
+  // Should get symbol, amount, price, currentPrice, profit
+  async getPortfolio(id: string, symbolId: string, baseSymbolId: string) {
+    // get price
+    const Bar = require('../bar')
+    const currentPrice = await Bar.getPrice(symbolId, baseSymbolId)
+
+    // get portfolio
+    const user = await this.find(id)
+    const portSymbols = user.portfolios.filter(portfolio => portfolio.symbolId === symbolId) || []
+
+    const summary: IPortfolioSummary = {
+      symbolId,
+      amount: 0,
+      price: 0,
+      currentPrice,
+      invest: 0,
+      profit: 0
+    }
+
+    // 100 = 2
+    // 200 = 1
+    // 300 = 2
+    // 300 = (300 / 100) x 2
+    portSymbols.forEach((portSymbol: Portfolio) => {
+      const profitGain = (currentPrice / portSymbol.price)
+      const totalGain = profitGain * portSymbol.amount
+
+      console.log(summary.amount, '+', portSymbol.amount)
+
+      summary.invest += portSymbol.price * portSymbol.amount
+      summary.profit += (profitGain * portSymbol.price) - summary.invest
+      summary.amount = summary.amount + portSymbol.amount
+    })
+
+    // average
+    summary.price = summary.invest / portSymbols.length
+
+    return summary
+  }
 }
 
 module.exports = UserModel

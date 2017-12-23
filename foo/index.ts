@@ -27,6 +27,17 @@ class Foo {
     let errorMessageText
 
     switch (method) {
+      case 'addPortfolio':
+        // return await this._userModel.addPortfolio.apply(this._userModel, command.params)
+        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderID, command.params[0], command.params[1], command.params[2], command.params[3] || 'THB')
+        const { symbolId, amount, profit } = portfolioSummary
+
+        const { getPortfolio } = __localeList[locale]({
+          symbolId, amount, profit, locale
+        })
+
+        return getPortfolio
+
       case 'getPrice':
         const from = command.params[0]
         const to = command.params[1] || 'THB'
