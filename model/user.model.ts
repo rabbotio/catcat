@@ -9,9 +9,11 @@ class UserModel {
   async upsert(id, data?) {
     const User = require('./user')
     const user = new User(id)
-    data && data.array.forEach(element =>
-      user.element = element
-    )
+
+    // Allow only some props to upsert
+    if (data) {
+      data.repliedAt && (user.repliedAt = data.repliedAt)
+    }
 
     await this._kvStorage.setItem(id, user)
   }

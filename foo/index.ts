@@ -6,7 +6,7 @@ class Foo {
   private _responder: Responder = null
   private _userModel: UserModel = null
 
-  constructor(kvStorage: KVStorage, responder: Responder) {
+  constructor(kvStorage: IKVStorage, responder: Responder) {
     this._kvStorage = kvStorage
     this._responder = responder
     const UserModel = require('../model/user.model')

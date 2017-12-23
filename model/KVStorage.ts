@@ -1,5 +1,11 @@
-class KVStorage {
-  private _mem = {}
+interface IKVStorage {
+  _mem: any
+  getItem(key)
+  setItem(key, value)
+}
+
+class KVStorage implements IKVStorage {
+  _mem = {}
 
   async getItem(key) {
     return this._mem[key]
