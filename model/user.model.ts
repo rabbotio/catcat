@@ -37,7 +37,8 @@ class UserModel {
   }
 
   // `^+100 omg 123 thb`   // To `100 OMG`at `123 THB` to port and show summary.
-  async addPortfolio(id: string, amount: number, symbolId: string, price: number, baseSymbolId: string = 'thb') {
+  async addPortfolio(id: string, amount: number, symbolId: string, price: number, currency: string = 'THB') {
+
     const user = await this.find(id)
     user.portfolios = user.portfolios || []
     user.portfolios.push({
@@ -46,14 +47,17 @@ class UserModel {
       price: Number(price),
     })
 
-    return this.getPortfolio(id, symbolId, baseSymbolId)
+    // Save
+    await this._kvStorage.setItem(id, user)
+
+    return this.getPortfolio(id, symbolId, currency)
   }
 
   // Should get symbol, amount, price, currentPrice, profit
-  async getPortfolio(id: string, symbolId: string, baseSymbolId: string) {
+  async getPortfolio(id: string, symbolId: string, currency: string = 'THB') {
     // get price
     const Bar = require('../bar')
-    const currentPrice = await Bar.getPrice(symbolId, baseSymbolId)
+    const currentPrice = await Bar.getPrice(symbolId, currency)
 
     // get portfolio
     const user = await this.find(id)
@@ -80,6 +84,14 @@ class UserModel {
     summary.price = summary.invest / portSymbols.length
 
     return summary
+  }
+
+  async clearPortfolios(id: string) {
+    const user = await this.find(id)
+    user.portfolios = []
+
+    // Save
+    await this._kvStorage.setItem(id, user)
   }
 }
 

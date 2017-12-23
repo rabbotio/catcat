@@ -17,6 +17,10 @@ class Foo {
     return this._kvStorage
   }
 
+  get userModel() {
+    return this._userModel
+  }
+
   get responder() {
     return this._responder
   }
@@ -28,12 +32,12 @@ class Foo {
 
     switch (method) {
       case 'addPortfolio':
-        // return await this._userModel.addPortfolio.apply(this._userModel, command.params)
-        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderID, command.params[0], command.params[1], command.params[2], command.params[3] || 'THB')
+        const currency = (command.params[3] || 'THB').toUpperCase()
+        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderID, command.params[0], command.params[1], command.params[2], currency)
         const { symbolId, amount, invest, profit } = portfolioSummary
 
         const { getPortfolio } = __localeList[locale]({
-          symbolId, amount, invest, profit, locale
+          symbolId, amount, invest, profit, locale, currency
         })
 
         return getPortfolio

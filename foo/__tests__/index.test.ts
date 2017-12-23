@@ -101,7 +101,7 @@ describe('Foo', () => {
     })
   })
 
-  it('can add portfolio', async () => {
+  it('can add portfolio', async (done) => {
     // Mock current price
     let currentPrice = 500
     Bar.getPrice = jest.fn()
@@ -113,20 +113,20 @@ describe('Foo', () => {
       .mockImplementationOnce(async () => currentPrice)
 
     const locale = 'en-US'
-    let symbolId = 'OMG'
+    const symbolId = 'OMG'
 
     let amount = 0
     let profit = 0
     let invest = 0
 
-    const mutatePortFolio = async (bidPrice, bidAmount) => new Promise(async (resolve, reject) => {
-      const result = await foo.reply(senderId, `^+${bidAmount} ${symbolId} ${bidPrice} thb`)
+    const mutatePortFolio = async (bidPrice, bidAmount, currency = 'THB') => new Promise(async (resolve, reject) => {
+      const result = await foo.reply(senderId, `^+${bidAmount} ${symbolId} ${bidPrice} ${currency}`)
       amount += bidAmount
       profit += (currentPrice - bidPrice) * bidAmount
       invest += bidPrice * bidAmount
 
       const getPortfolio = __localeList[locale]({
-        symbolId, amount, invest, profit, locale
+        symbolId, amount, invest, profit, locale, currency
       }).getPortfolio
 
       expect(result).toMatchObject({
@@ -156,5 +156,50 @@ describe('Foo', () => {
 
     // Add another 1 omg at 2x higher from current price
     await mutatePortFolio(currentPrice * 2, 1)
+
+    // dispose
+    await foo.userModel.clearPortfolios(senderId)
+
+    done()
+  })
+
+  it('can add portfolio and return as USD', async (done) => {
+    // Mock current price
+    Bar.getPrice = jest.fn()
+      .mockImplementationOnce(async () => 20)
+      .mockImplementationOnce(async () => 20)
+
+    // Constance
+    const locale = 'en-US'
+    const symbolId = 'OMG'
+
+    // All lower
+    let result = await foo.reply(senderId, `^+1 omg 5 usd`)
+
+    expect(result).toMatchObject({
+      recipient: { id: senderId },
+      message: {
+        text: __localeList[locale]({
+          symbolId, amount: 1, invest: 5, profit: 15, locale, currency: 'USD'
+        }).getPortfolio
+      }
+    })
+
+    // All cap
+    result = await foo.reply(senderId, `^+1 OMG 5 USD`)
+
+    expect(result).toMatchObject({
+      recipient: { id: senderId },
+      message: {
+        text: __localeList[locale]({
+          symbolId, amount: 2, invest: 10, profit: 30, locale, currency: 'USD'
+        }).getPortfolio
+      }
+    })
+
+    // dispose
+    await foo.userModel.clearPortfolios(senderId)
+
+    done()
   })
 })  
