@@ -68,10 +68,6 @@ class UserModel {
       profit: 0
     }
 
-    // 100 = 2
-    // 200 = 1
-    // 300 = 2
-    // 300 = (300 / 100) x 2
     portSymbols.forEach((portSymbol: Portfolio) => {
       summary.amount += portSymbol.amount
 
@@ -82,7 +78,6 @@ class UserModel {
 
     // average
     summary.price = summary.invest / portSymbols.length
-
 
     return summary
   }

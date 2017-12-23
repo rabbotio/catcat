@@ -103,48 +103,58 @@ describe('Foo', () => {
 
   it('can add portfolio', async () => {
     // Mock current price
-    let bidPrice = 100
     let currentPrice = 500
     Bar.getPrice = jest.fn()
+      .mockImplementationOnce(async () => currentPrice)
+      .mockImplementationOnce(async () => currentPrice)
+      .mockImplementationOnce(async () => currentPrice)
+      .mockImplementationOnce(async () => currentPrice)
       .mockImplementationOnce(async () => currentPrice)
       .mockImplementationOnce(async () => currentPrice)
 
     const locale = 'en-US'
     let symbolId = 'OMG'
 
-    let price = bidPrice
-    let amount = 1
-    let profit = 400
+    let amount = 0
+    let profit = 0
+    let invest = 0
+
+    const mutatePortFolio = async (bidPrice, bidAmount) => new Promise(async (resolve, reject) => {
+      const result = await foo.reply(senderId, `^+${bidAmount} ${symbolId} ${bidPrice} thb`)
+      amount += bidAmount
+      profit += (currentPrice - bidPrice) * bidAmount
+      invest += bidPrice * bidAmount
+
+      const getPortfolio = __localeList[locale]({
+        symbolId, amount, invest, profit, locale
+      }).getPortfolio
+
+      expect(result).toMatchObject({
+        recipient: { id: senderId },
+        message: {
+          text: getPortfolio
+        }
+      })
+
+      return resolve(true)
+    })
 
     // Try with 1 omg at 100 thb
-    let result = await foo.reply(senderId, `^+1 ${symbolId} 100 thb`)
-
-    let { getPortfolio } = __localeList[locale]({
-      symbolId, amount, profit, locale
-    })
-
-    expect(result).toMatchObject({
-      recipient: { id: senderId },
-      message: {
-        text: getPortfolio
-      }
-    })
+    await mutatePortFolio(100, 1)
 
     // Add another 1 omg at 100 thb
-    result = await foo.reply(senderId, `^+1 ${symbolId} 100 thb`)
-    amount = 2
-    profit = 800
+    await mutatePortFolio(100, 1)
 
-    getPortfolio = __localeList[locale]({
-      symbolId, amount, profit, locale
-    }).getPortfolio
+    // Add another 2 omg at 100 thb
+    await mutatePortFolio(100, 2)
 
-    expect(result).toMatchObject({
-      recipient: { id: senderId },
-      message: {
-        text: getPortfolio
-      }
-    })
+    // Add another 1 omg at lower 50% from current price
+    await mutatePortFolio(currentPrice / 2, 1)
 
+    // Add another 1 omg at current price
+    await mutatePortFolio(currentPrice, 1)
+
+    // Add another 1 omg at 2x higher from current price
+    await mutatePortFolio(currentPrice * 2, 1)
   })
 })  
