@@ -103,22 +103,23 @@ describe('Foo', () => {
 
   it('can add portfolio', async () => {
     // Mock current price
+    let bidPrice = 100
     let currentPrice = 500
     Bar.getPrice = jest.fn()
       .mockImplementationOnce(async () => currentPrice)
       .mockImplementationOnce(async () => currentPrice)
 
-    const invest = 100 * 1
-    const price = invest / 1
-    const profit = currentPrice - price
-    const amount = 1
-    const symbolId = 'OMG'
+    const locale = 'en-US'
+    let symbolId = 'OMG'
+
+    let price = bidPrice
+    let amount = 1
+    let profit = 400
 
     // Try with 1 omg at 100 thb
     let result = await foo.reply(senderId, `^+1 ${symbolId} 100 thb`)
 
-    const locale = 'en-US'
-    const { getPortfolio } = __localeList[locale]({
+    let { getPortfolio } = __localeList[locale]({
       symbolId, amount, profit, locale
     })
 
@@ -128,5 +129,22 @@ describe('Foo', () => {
         text: getPortfolio
       }
     })
+
+    // Add another 1 omg at 100 thb
+    result = await foo.reply(senderId, `^+1 ${symbolId} 100 thb`)
+    amount = 2
+    profit = 800
+
+    getPortfolio = __localeList[locale]({
+      symbolId, amount, profit, locale
+    }).getPortfolio
+
+    expect(result).toMatchObject({
+      recipient: { id: senderId },
+      message: {
+        text: getPortfolio
+      }
+    })
+
   })
 })  

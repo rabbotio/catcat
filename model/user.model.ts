@@ -73,18 +73,16 @@ class UserModel {
     // 300 = 2
     // 300 = (300 / 100) x 2
     portSymbols.forEach((portSymbol: Portfolio) => {
-      const profitGain = (currentPrice / portSymbol.price)
-      const totalGain = profitGain * portSymbol.amount
+      summary.amount += portSymbol.amount
 
-      console.log(summary.amount, '+', portSymbol.amount)
-
-      summary.invest += portSymbol.price * portSymbol.amount
-      summary.profit += (profitGain * portSymbol.price) - summary.invest
-      summary.amount = summary.amount + portSymbol.amount
+      const invest = portSymbol.price * portSymbol.amount
+      summary.profit += (currentPrice * portSymbol.amount) - invest
+      summary.invest += invest
     })
 
     // average
     summary.price = summary.invest / portSymbols.length
+
 
     return summary
   }
