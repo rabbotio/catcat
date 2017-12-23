@@ -4,14 +4,14 @@ class UserModel {
   constructor(kvStorage) {
     if (!kvStorage) throw new Error('Required kvStorage')
     this._kvStorage = kvStorage
-
-    // seed
-    this.upsert('2238896416126713')
   }
 
-  async upsert(id) {
+  async upsert(id, data?) {
     const User = require('./user')
     const user = new User(id)
+    data && data.array.forEach(element =>
+      user.element = element
+    )
 
     await this._kvStorage.setItem(id, user)
   }

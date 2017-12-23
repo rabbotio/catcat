@@ -1,11 +1,21 @@
+const _handleMessageText = async (foo, senderId, messageText) => {
+  // TODO : identify user state here
+
+  // Stamp user time
+  await foo.userModel.upsert(senderId, { repliedAt: new Date().toISOString() })
+
+  // 
+  return foo.reply(senderId, messageText)
+}
+
 const receivedMessage = async (event, foo) => {
-  const senderID = event.sender.id;
-  const recipientID = event.recipient.id;
+  const senderId = event.sender.id;
+  const recipientId = event.recipient.id;
   const timeOfMessage = event.timestamp;
   const message = event.message;
 
   console.log("Received message for user %d and page %d at %d with message:",
-    senderID, recipientID, timeOfMessage);
+    senderId, recipientId, timeOfMessage);
   console.log(JSON.stringify(message));
 
   const isEcho = message.is_echo;
@@ -28,18 +38,17 @@ const receivedMessage = async (event, foo) => {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    return foo.responder.sendTextMessage(senderID, "Quick reply tapped");
+    return foo.responder.sendTextMessage(senderId, "Quick reply tapped");
   }
 
   if (messageText) {
-    //return foo.responder.sendTextMessage(senderID, messageText);
-    await foo.reply(senderID, messageText).catch(err => {
+    await _handleMessageText(foo, senderId, messageText).catch(err => {
       console.error(err)
-      foo.responder.sendTextMessage(senderID, err.message)
+      foo.responder.sendTextMessage(senderId, err.message)
     })
     return
   } else if (messageAttachments) {
-    foo.responder.sendTextMessage(senderID, "Message with attachment received");
+    foo.responder.sendTextMessage(senderId, "Message with attachment received");
   } else {
     // hm?
   }

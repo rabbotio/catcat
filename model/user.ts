@@ -1,11 +1,12 @@
 class User {
-  senderID: string
+  senderId: string
   commands: any[]
   symbols: IPortfolio[]
   state: string = null
+  repliedAt: string // Date
 
-  constructor(senderID: string) {
-    this.senderID = senderID
+  constructor(senderId: string) {
+    this.senderId = senderId
 
     const { NEW_COMER } = require('./user.state')
     this.state = NEW_COMER

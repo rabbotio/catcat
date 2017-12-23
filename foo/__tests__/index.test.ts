@@ -15,6 +15,9 @@ describe('Foo', () => {
   // Sender
   const senderId = '2238896416126713'
 
+  // seed
+  foo.userModel.upsert(senderId)
+
   it('not repeat last command if n/a', async () => {
     let result = await foo.reply(senderId, '.')
 

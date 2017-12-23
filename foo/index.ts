@@ -33,7 +33,7 @@ class Foo {
     switch (method) {
       case 'addPortfolio':
         const currency = (command.params[3] || 'THB').toUpperCase()
-        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderID, command.params[0], command.params[1], command.params[2], currency)
+        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderId, command.params[0], command.params[1], command.params[2], currency)
         const { symbolId, amount, invest, profit } = portfolioSummary
 
         const { getPortfolio } = __localeList[locale]({
@@ -60,7 +60,7 @@ class Foo {
           from, to, price, locale
         })
 
-        await this._userModel.addCommand(user.senderID, command)
+        await this._userModel.addCommand(user.senderId, command)
 
         return getPrice
 
@@ -74,16 +74,16 @@ class Foo {
     // const { NEW_COMER, WATCH_PRICE } = require('../model/user.state')
     switch (userState) {
       // case NEW_COMER:
-      //  return this._responder.sendTextMessage(senderID, 'Greeting!')
+      //  return this._responder.sendTextMessage(senderId, 'Greeting!')
       default:
         const { toCommand } = require('./parser')
         return toCommand(messageText)
     }
   }
 
-  async reply(senderID: string, messageText: string) {
-    // Section by current senderID state
-    const user = await this._userModel.find(senderID)
+  async reply(senderId: string, messageText: string) {
+    // Section by current senderId state
+    const user = await this._userModel.find(senderId)
     let command = this.route(user.state, messageText)
 
     // Repeat?
@@ -93,8 +93,8 @@ class Foo {
     const answer = await this.run(user, command)
 
     // Reply
-    console.log(`🤖 reply [${senderID}] : ${answer}`)
-    return this._responder.sendTextMessage(senderID, answer)
+    console.log(`🤖 reply [${senderId}] : ${answer}`)
+    return this._responder.sendTextMessage(senderId, answer)
   }
 }
 
