@@ -52,18 +52,18 @@ Will handle chat related
 - [ ] `^omg%`               // To prompt for `value` as `OMG` and show profit as `%`.
 - [ ] `^omg thb`            // To prompt for `value` as `OMG` and show profit as `thb`.
 - [ ] `^+100 omg`           // To prompt for `price` and `100 OMG` then add it to port.
-- [ ] `^+100 omg 123`       // To add `100 OMG`at `123 THB` to port and show summary.
-- [ ] `^+100 omg 123 thb`   // To add `100 OMG`at `123 THB` to port and show summary.
+- [x] `^+100 omg 123`       // To add `100 OMG`at `123 THB` to port and show summary.
+- [x] `^+100 omg 123 usd`   // To add `100 OMG`at `123 USD` to port and show summary.
 - [ ] `^-100 omg 345 thb`   // To remove `100 OMG`at `345 THB` to port and show summary.
 - [ ] `^bx.csv`             // To prompt for choose `bx-*.csv` file from `bx` and show summary.
 - [ ] `^`                   // To show summary.
   ```
   💵 PORTFOLIO - 2017/12/23 16:30:11
-  ---------------------------------
-  OMG 100/300 = 300% // +200 THB
-  ETH 100/200 = 200% // +100 THB
-  ---------------------------------
-  TOTAL            500% // +300 THB
+  
+  OMG 100/300 = 300% (+200 THB)
+  ETH 100/200 = 200% (+100 THB)
+
+  Profit 500% (+300 THB)
   ```
 - [ ] `^omg?`               // To show summary for `OMG`.
   ```
