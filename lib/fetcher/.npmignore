@@ -1,3 +1,5 @@
 examples
-__test__
+__tests__
+node_nodules
+tsconfig.json
 *.ts
