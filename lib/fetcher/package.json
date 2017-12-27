@@ -1,6 +1,6 @@
 {
   "name": "@rabbotio/fetcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simply fetch get/post as json",
   "main": "index.js",
   "author": "katopz <katopz@gmail.com>",
@@ -12,7 +12,7 @@
     "build": "tsc",
     "dev": "tsc -w",
     "test": "jest --watchAll",
-    "release": "npm publish --access=public"
+    "release": "npm run build && npm publish --access=public"
   },
   "license": "MIT",
   "devDependencies": {
