@@ -19,6 +19,8 @@ const postJSON = (uri, body = {}) =>
   }).then(handleResponseError)
 
 const getJSON = (uri, body = {}) =>
-  fetch(`${uri}?${jsonToQueryString(body)}`).then(handleResponseError)
+  fetch(`${uri}?${jsonToQueryString(body)}`, {
+    headers: { 'Content-Type': 'application/json' }
+  }).then(handleResponseError)
 
 export { postJSON, getJSON }
