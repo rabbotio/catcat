@@ -33,7 +33,7 @@ Will handle chat related
 ### Price
 - [x] `$omg`               // To get `OMG` price in `THB`.
 - [x] `$omg eth`           // To get `OMG` price in `ETH`.
-- [ ] `$`                  // To show help about `$` command and list last or top 4 symbols.
+- [ ] `$`                  // To begin flow of `$` command and list last or top 4 symbols.
 - [ ] `$$`                 // To repeat last `$` command.
 
 ### Help
@@ -48,29 +48,34 @@ Will handle chat related
 - [ ] `?omg`               // To ask for information about `OMG`.
 
 ### Send
-- [ ] `-`                  // To show help about `-` command.
+- [ ] `-`                  // To begin flow of `-` command.
 - [ ] `-100 omg @katopz`   // To send `100` as `OMG` to user name `@katopz`.
 - [ ] `--`                 // To repeat last `-` command with prompt for `to` targeted user.
 - [ ] `-omg`               // To send `OMG` with prompt for `value` then `to` targeted user.
 - [ ] `-100 omg`           // To send `100` as `OMG` with prompt for `to` targeted user.
 
 ### Receive
-- [ ] `+`                  // To show help about `+` command.
+- [ ] `+`                  // To begin flow of `+` command.
 - [ ] `+100 omg @katopz`   // To ask for `100` as `OMG` from user name `@katopz`.
 - [ ] `++`                 // To repeat last `+` command with prompt for `to` targeted user.
 - [ ] `+omg`               // To send `OMG` with prompt for `value` then `to` targeted user.
 - [ ] `+100 omg`           // To send `100` as `OMG` with prompt for `to` targeted user.
 
 ### Chart
-- [ ] `#`                  // To show help about `#` command and list last or top 4 symbols.
+- [ ] `#`                  // To begin flow of `#` command and list last or top 4 symbols.
 - [ ] `#omg`               // To see `OMG` chart.
 - [ ] `##`                 // To repeat last `#` command.
 - [ ] `#omg xzc`           // To see `OMG` chart against `XZC`.
 
 ### Forecast
-- [ ] `~`                  // To show help about `~` command and list last or top 4 symbols.
+- [ ] `~`                  // To begin flow of `~` command and list last or top 4 symbols.
 - [ ] `~omg`               // To get forecast about `OMG`.
 - [ ] `~~`                 // To repeat last `~` command.
+
+### Wallets
+- [ ] `=`                  // To begin flow of `=` command.
+- [ ] `=+`                 // To create new wallet.
+- [ ] `=-`                 // To show list for remove wallet.
 
 ### Portfolio
 - [ ] `^omg`                // To prompt for `value` as `OMG` and show profit as `%`.
@@ -81,7 +86,7 @@ Will handle chat related
 - [x] `^+100 omg 123 usd`   // To add `100 OMG`at `123 USD` to port and show summary.
 - [ ] `^-100 omg 345 thb`   // To remove `100 OMG`at `345 THB` to port and show summary.
 - [ ] `^bx.csv`             // To prompt for choose `bx-*.csv` file from `bx` and show summary.
-- [ ] `^`                   // To show help about `^` command and list last or top 4 symbols.
+- [ ] `^`                   // To begin flow of `^` command and list last or top 4 symbols.
 - [ ] `^^`                  // To repeat last `^` command.
 - [ ] `^*`                  // To show portfolio summary.
 - [ ] `^#`                  // To show portfolio history.
@@ -108,12 +113,12 @@ Will handle chat related
   ```
 
 ### News
-- [ ] `*`                   // To show help about `*` command and list last or top 4 symbols.
+- [ ] `*`                   // To begin flow of `*` command and list last or top 4 symbols.
 - [ ] `*omg`                // To get news about `OMG`
 - [ ] `**`                  // To repeat last `*` command.
 
 ### Alert
-- [ ] `!`                   // To show help about `!` command and list last or top 4 symbols.
+- [ ] `!`                   // To begin flow of `!` command and list last or top 4 symbols.
 - [ ] `!omg>5%`             // To alert when `OMG` price up `5%` from now.
 - [ ] `!omg<5%`             // To alert when `OMG` price down `5%` from now.
 - [ ] `!omg<300`            // To alert when `OMG` price less then `300`.
@@ -121,7 +126,7 @@ Will handle chat related
 - [ ] `!!`                  // To repeat last `!` command.
 
 ### Exchanges
-- [ ] `%`                   // To show help about `%` command and list last or top 4 exchanges.
+- [ ] `%`                   // To begin flow of `%` command and list last or top 4 exchanges.
 - [ ] `%%`                  // To repeat last `%` command.
 - [ ] `%bitfinex`           // To select `bitfinex`
 
@@ -154,7 +159,7 @@ Will handle coins related
 ## v2
 - [ ] Full node
 - [ ] Can exchange
-- [ ] Can create multisig wallet
+- [ ] Can create multisig wallet : https://github.com/gnosis/MultiSigWallet
 - [ ] Can trigger transfer when low exchange rate.
 - [ ] Can create schedule transfer.
 - [ ] Can cancel scheduled transfer. 
