@@ -4,6 +4,10 @@
 ![](img/overview.png)
 [EDIT](http://www.nomnoml.com/#view/%5B%3Cactor%3EUser%5D%3C--%F0%9F%94%96%5B%E2%9C%89%EF%B8%8F%202Factors%7C%F0%9F%94%96%20ACCESS_TOKEN%5D%0A%5B%3Cactor%3EUser%5D%3C-%3E%F0%9F%94%96%5B%F0%9F%A4%96%20chatbot%5D%0A%0A%5B%F0%9F%A4%96%20chatbot%5D%0A%5B%F0%9F%A4%96%20chatbot%5D%3C-%3E%F0%9F%94%96%5B%F0%9F%95%B4%20agent%5D%0A%5B%F0%9F%A4%96%20chatbot%5D%3C-%3E%5B%F0%9F%95%B7%20web%5D%0A%0A%5B%F0%9F%95%B7%20web%5D%3C-%3E%5B%F0%9F%95%B4%20agent%5D%0A%0A%5B%F0%9F%95%B4%20agent%7C%F0%9F%97%9D%20API_KEY%7C%F0%9F%94%96%20ACCESS_TOKEN%7C%7CcreateWallet%7ClistWallet%7CgetWallet%7ClinkWallet%7CaddWallet%7CremoveWallet%5D%0A%0A%5B%F0%9F%95%B4%20agent%5D%3C-%3E%F0%9F%97%9D%F0%9F%94%96%5B%F0%9F%91%AE%20security%5D%0A%0A%5B%E2%9C%89%EF%B8%8F%202Factors%5D%3C--%F0%9F%94%96%5B%F0%9F%91%AE%20security%5D%0A%5B%F0%9F%91%AE%20security%7C%F0%9F%94%91%20MASTER_KEY%7C%F0%9F%97%9D%20API_KEY%7C%F0%9F%94%96%20ACCESS_TOKEN%5D%F0%9F%92%B0%3C-%3E%F0%9F%94%91%5B%F0%9F%97%84%20encrypted%20storage%5D%0A%5B%F0%9F%95%B4%20agent%5D%3C-%3E%F0%9F%92%B0%5B%F0%9F%92%8E%20web3%5D%0A%5B%F0%9F%92%8E%20web3%5D%3C-%3E%F0%9F%92%B0%5B%E2%9B%93%20blockchain%5D)
 
+## Hot wallets
+![](img/hot-wallet-workflow.png)
+[EDIT](http://www.nomnoml.com/#view/%5B%3Cactor%3EUser%5D-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Greeting%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Greeting%5D-%3E%5B%3Cchoice%3E%20New%20user%3F%5D%0A%2F%2F%20Create%0A%5B%3Cchoice%3E%20New%20user%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20wallets%20FAQ%7COK%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20wallets%20FAQ%7COK%5D-%3E%5BCreate%20hot%20wallets%5D%0A%5BCreate%20hot%20wallets%5D-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20wallets%20address%7C%F0%9F%A4%96%20%3A%20Public%20Address%200x...%7C%F0%9F%A4%96%20%3A%20QR%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20wallets%20address%5D-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20main%20menu%7Cbalance%7Csend%7Crecieve%5D%0A%2F%2F%20Read%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Showing%20balance%7CETH%20%3A%200%20%7CXLM%20%3A%200%5D-%3E%5B%3Cchoice%3EETH%3F%5D%0A%5B%3Cchoice%3EETH%3F%5D-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20ETH%7Csend%7Crequest%7Crecieve%5D%0A%2F%2F%20Send%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20ETH%7Csend%7Crequest%7Crecieve%5D-%3E%5B%3Cchoice%3Erecieve%3F%5D%0A%5B%3Cchoice%3Erecieve%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20public%20QR%5D%0A%2F%2F%20Recieve%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20ETH%7Csend%7Crequest%7Crecieve%5D-%3E%5B%3Cchoice%3Esend%3F%5D%0A%5B%3Cchoice%3Esend%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Who%3F%7C%F0%9F%A4%96%20%3A%20How%20much%3F%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Who%3F%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Who%3F%5D-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Confirm%3F%7C%7CTO%20%3D%20%40katopz%20%7C%20AMOUNT%20%3D%201%20ETH%20(%241%2C140)%7CFEE%20%3D%200.01%20ETH%20(%241.140)%7CTOTAL%20%3D%201.001%20ETH%20(%241%2C141.14)%20%7C%7COK%7CCancel%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Confirm%3F%5D-%3E%5Btransfer%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20ETH%7Csend%7Crecieve%5D-%3E%5B%3Cchoice%3Erequest%3F%5D%0A%5B%3Cchoice%3Erequest%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Who%3F%5D%0A%2F%2F%20Sending%0A%5Bsending%5D-%3E%5B%3Cchoice%3Etransaction%3F%5D%0A%5B%3Cchoice%3Etransaction%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20transaction%7Ctx%20address%7Cetherscan%20link%5D%0A%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20transaction%5D-%3E%5B%3Cchoice%3Esent%3F%5D%0A%2F%2F%20Recieving%0A%5Brecieving%5D-%3E%5B%3Cchoice%3Etransaction%3F%5D%0A%2F%2F%20Done%0A%5B%3Cchoice%3Esent%3F%5Dy-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20summary%7CFROM%7CTO%7CTOTAL%7CFEE%7CLATENCY%5D%0A%5B%3Cchoice%3E%20New%20user%3F%5Dn-%3E%5B%3Cnote%3E%F0%9F%A4%96%20%3A%20Show%20main%20menu%5D)
+
 ## Features
 ### Basic bank
 - [ ] Can create wallet
@@ -134,32 +138,41 @@ Will handle chat related
 Will handle coins related
 
 ## alpha
-### PROMPT state
-- [ ] Can prompt for `CHECK_PRICE`, `SEND_COINS`, `WATCH_PRICE`
-
-### CHECK_PRICE state
-- [ ] Can check price by symbol.
-
-### SEND_COINS state
-- [ ] Can send ethereum by address
-- [ ] Can send ethereum by userId
-- [ ] Can notify when transfer start
-- [ ] Can notify when transfer succeed
-- [ ] Can notify when transfer failed
-- [ ] Can retry or cancel when transfer failed
-- [ ] Can prompt for next action after transfer  
+> `Ethereum` Hot Wallets
+- [ ] Can create `ETH` wallet.
+- [ ] Can show `ETH` wallet.
+- [ ] Can access `ETH` wallet.
+- [ ] Can send `ETH` via `@username`.
+- [ ] Can send `USD` as `ETH`.
+- [ ] Can send `THB` as `ETH`.
+- [ ] Can receive `ETH`.
+- [ ] Can show sending transaction.
+- [ ] Can show sent transaction.
+- [ ] Can send/receive `ETH` via `email` as link callback.
+- [ ] Can request `ETH` via `email` as link callback.
+- [ ] Can request `ETH` via `@username`.
+- [ ] Can send `ETH` via `public key`.
 
 ## beta
-- [ ] Can create ethereum wallet
-- [ ] Can send mail about wallet and secret
+> `Stellar` Hot Wallets
+- [ ] Can create/show/manage `XLM` wallet.
+- [ ] Can send/receive/request `XLM`.
 
 ## v1
-- [ ] Can create bitcoin wallet
+> Web Warm Wallets
+- [ ] Can verify email
+- [ ] 2factor with email : Can send mail about wallet and secret
+- [ ] [web] Can add `ETH`/`XLM` wallet from public key.
+- [ ] [web] Can ask for private key to unlock/sign tx.
+- [ ] [web] Can use `metamask` for unlock/sign tx.
+- [ ] [web] Can remove wallets.
 
 ## v2
-- [ ] Full node
-- [ ] Can exchange
+- [ ] Can exchange between `ETH` and `XLM` : https://github.com/rabbotio/stellereum-api
+
+## v3
 - [ ] Can create multisig wallet : https://github.com/gnosis/MultiSigWallet
-- [ ] Can trigger transfer when low exchange rate.
+
+## v4
 - [ ] Can create schedule transfer.
 - [ ] Can cancel scheduled transfer. 
