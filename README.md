@@ -155,7 +155,8 @@ Will handle coins related
 
 ## beta
 > `Stellar` Hot Wallets
-- [ ] Can create/show/manage `XLM` wallet.
+- [ ] Can use `ETH` to create `XLM` wallet.
+- [ ] Can show/manage `XLM` wallet.
 - [ ] Can send/receive/request `XLM`.
 
 ## v1
