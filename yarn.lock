@@ -10,6 +10,19 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@rabbotio/cryptox@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@rabbotio/cryptox/-/cryptox-0.3.0.tgz#a80e9c875917f24147cfde6f823ff839f5982ac3"
+  dependencies:
+    "@rabbotio/fetcher" "^1.0.4"
+    isomorphic-fetch "^2.2.1"
+
+"@rabbotio/fetcher@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rabbotio/fetcher/-/fetcher-1.0.4.tgz#58854589771508abdd35055a3d1f7558dff313dd"
+  dependencies:
+    isomorphic-fetch "^2.2.1"
+
 "@types/jest@^22.0.1":
   version "22.0.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.0.1.tgz#6370a6d60cce3845e4cd5d00bf65f654264685bc"

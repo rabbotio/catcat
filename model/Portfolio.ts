@@ -9,7 +9,7 @@ interface IPortfolioSummary {
   amount: number,
   invest: number,
   price: number,
-  currentPrice: number,
+  last: number,
   profit: number
 }
 

@@ -43,21 +43,23 @@ class Foo {
         return getPortfolio
 
       case 'getPrice':
+        const exchange = 'bx'
         const from = command.params[0]
         const to = command.params[1] || 'THB'
+
         const Bar = require('../bar')
-        const price = await Bar.getPrice(from, to).catch(err => {
+        const price = await Bar.getPrice(exchange, from, to).catch(err => {
           console.error(err)
           errorMessageText = err.messageText
         })
 
         // Handle error
-        if (!price) {
-          return errorMessageText || `Sorry! Can't get ${from} price`
+        if (!price.last) {
+          return errorMessageText || `Sorry! Can't get ${from}/${to} price from ${exchange}`
         }
 
         const { getPrice } = __localeList[locale]({
-          from, to, price, locale
+          from, to, price: price.last, locale
         })
 
         await this._userModel.addCommand(user.senderId, command)

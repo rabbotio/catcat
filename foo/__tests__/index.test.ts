@@ -32,66 +32,66 @@ describe('Foo', () => {
   // TODO : mock user locale
   it('can reply default locale price for `$symbol`', async () => {
     // OMG -> Default
-    let price = 999
+    let price = { last: 999 }
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
 
     let result = await foo.reply(senderId, '$OMG')
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${price} THB` }
+      message: { text: `1 OMG = ${price.last} THB` }
     })
   })
 
   it('can reply default locale price for `$ symbol`', async () => {
     // OMG -> Default
-    let price = 999
+    let price = { last: 999 }
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
 
     let result = await foo.reply(senderId, '$ OMG')
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${price} THB` }
+      message: { text: `1 OMG = ${price.last} THB` }
     })
   })
 
   it('can reply `$OMG JPY` as `1 OMG price in JPY`', async () => {
     // OMG -> JPY
-    let price = 999
+    let price = { last: 999 }
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
 
     let result = await foo.reply(senderId, '$OMG JPY')
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${price} JPY` }
+      message: { text: `1 OMG = ${price.last} JPY` }
     })
   })
 
   it('can reply `$OMG JPY` as `1 OMG price in JPY` with currency comma', async () => {
     // JPY with currency comma
-    let price = 9999
+    let price = { last: 999 }
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
 
     let result = await foo.reply(senderId, '$OMG JPY')
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${Number(price).toLocaleString('JPY')} JPY` }
+      message: { text: `1 OMG = ${Number(price.last).toLocaleString('JPY')} JPY` }
     })
   })
 
   it('can repeat last command', async () => {
     // JPY with currency comma
-    let price = 9999
+    let price = { last: 9999 }
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
 
     let result = await foo.reply(senderId, '$OMG USD')
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${Number(price).toLocaleString('USD')} USD` }
+      message: { text: `1 OMG = ${Number(price.last).toLocaleString('USD')} USD` }
     })
 
     Bar.getPrice = jest.fn().mockImplementationOnce(async () => price)
@@ -100,23 +100,24 @@ describe('Foo', () => {
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${Number(price).toLocaleString('USD')} USD` }
+      message: { text: `1 OMG = ${Number(price.last).toLocaleString('USD')} USD` }
     })
   })
 
   it('can add portfolio', async (done) => {
     // Mock current price
-    let currentPrice = 500
+    let price = { last: 500 }
     Bar.getPrice = jest.fn()
-      .mockImplementationOnce(async () => currentPrice)
-      .mockImplementationOnce(async () => currentPrice)
-      .mockImplementationOnce(async () => currentPrice)
-      .mockImplementationOnce(async () => currentPrice)
-      .mockImplementationOnce(async () => currentPrice)
-      .mockImplementationOnce(async () => currentPrice)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
 
     const locale = 'en-US'
     const symbolId = 'OMG'
+    const { last } = price
 
     let amount = 0
     let profit = 0
@@ -125,7 +126,7 @@ describe('Foo', () => {
     const mutatePortFolio = async (bidPrice, bidAmount, currency = 'THB') => new Promise(async (resolve, reject) => {
       const result = await foo.reply(senderId, `^+${bidAmount} ${symbolId} ${bidPrice} ${currency}`)
       amount += bidAmount
-      profit += (currentPrice - bidPrice) * bidAmount
+      profit += (last - bidPrice) * bidAmount
       invest += bidPrice * bidAmount
 
       const getPortfolio = __localeList[locale]({
@@ -152,13 +153,13 @@ describe('Foo', () => {
     await mutatePortFolio(100, 2)
 
     // Add another 1 omg at lower 50% from current price
-    await mutatePortFolio(currentPrice / 2, 1)
+    await mutatePortFolio(last / 2, 1)
 
     // Add another 1 omg at current price
-    await mutatePortFolio(currentPrice, 1)
+    await mutatePortFolio(last, 1)
 
     // Add another 1 omg at 2x higher from current price
-    await mutatePortFolio(currentPrice * 2, 1)
+    await mutatePortFolio(last * 2, 1)
 
     // dispose
     await foo.userModel.clearPortfolios(senderId)
@@ -168,9 +169,10 @@ describe('Foo', () => {
 
   it('can add portfolio and return as USD', async (done) => {
     // Mock current price
+    let price = { last: 20 }
     Bar.getPrice = jest.fn()
-      .mockImplementationOnce(async () => 20)
-      .mockImplementationOnce(async () => 20)
+      .mockImplementationOnce(async () => price)
+      .mockImplementationOnce(async () => price)
 
     // Constance
     const locale = 'en-US'

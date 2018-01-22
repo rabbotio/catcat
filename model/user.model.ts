@@ -55,11 +55,11 @@ class UserModel {
     return this.getPortfolio(id, symbolId, currency)
   }
 
-  // Should get symbol, amount, price, currentPrice, profit
-  async getPortfolio(id: string, symbolId: string, currency: string = 'THB') {
+  // Should get symbol, amount, price, last, profit
+  async getPortfolio(id: string, symbolId: string, currency: string = 'THB', exchange = 'bx') {
     // get price
     const Bar = require('../bar')
-    const currentPrice = await Bar.getPrice(symbolId, currency)
+    const { last } = await Bar.getPrice(exchange, symbolId, currency)
 
     // get portfolio
     const user = await this.find(id)
@@ -69,7 +69,7 @@ class UserModel {
       symbolId,
       amount: 0,
       price: 0,
-      currentPrice,
+      last,
       invest: 0,
       profit: 0
     }
@@ -78,7 +78,7 @@ class UserModel {
       summary.amount += portSymbol.amount
 
       const invest = portSymbol.price * portSymbol.amount
-      summary.profit += (currentPrice * portSymbol.amount) - invest
+      summary.profit += (last * portSymbol.amount) - invest
       summary.invest += invest
     })
 
