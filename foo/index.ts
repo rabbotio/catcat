@@ -33,7 +33,7 @@ class Foo {
     switch (method) {
       case 'addPortfolio':
         const currency = (command.params[3] || 'THB').toUpperCase()
-        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.senderId, command.params[0], command.params[1], command.params[2], currency)
+        const portfolioSummary: IPortfolioSummary = await this._userModel.addPortfolio(user.fbmId, command.params[0], command.params[1], command.params[2], currency)
         const { symbolId, amount, invest, profit } = portfolioSummary
 
         const { getPortfolio } = __localeList[locale]({
@@ -62,14 +62,23 @@ class Foo {
           from, to, price: price.last, locale
         })
 
-        await this._userModel.addCommand(user.senderId, command)
+        await this._userModel.addCommand(user.fbmId, command)
 
         return getPrice
-
       default:
         // Not a command 
         return 'What?'
     }
+  }
+
+  async run2(context: any, command: Command) {
+    if (command.clazz !== 'wallet') return 'What?'
+
+    const method = require(`./${command.clazz}`)[command.method]
+    const result = await method.apply(null, [context].concat(command.params))
+    if (result) return result.address
+
+    return 'What?'
   }
 
   route(userState: string, messageText: string): Command {
@@ -83,6 +92,15 @@ class Foo {
     }
   }
 
+  // TODO : prevState, state, nextState
+  route2(userState: string, messageText: string): Command {
+    switch (userState) {
+      default:
+        const { toCommand2 } = require('./parser')
+        return toCommand2(messageText)
+    }
+  }
+
   async reply(senderId: string, messageText: string) {
     // Section by current senderId state
     const user = await this._userModel.find(senderId)
@@ -92,7 +110,15 @@ class Foo {
     if (command.method === 'repeat') command = (user.commands && user.commands[0]) || command
 
     // Run command
-    const answer = await this.run(user, command)
+    let answer = await this.run(user, command)
+
+    // TODO : migrate command -> command2
+    if (answer === 'What?') {
+      const context = { user }
+
+      command = this.route2(user.state, messageText)
+      answer = await this.run2(context, command)
+    }
 
     // Reply
     console.log(`🤖 reply [${senderId}] : ${answer}`)

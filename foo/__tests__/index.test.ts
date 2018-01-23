@@ -207,4 +207,13 @@ describe('Foo', () => {
 
     done()
   })
+
+  it('can reply wallet create', async () => {
+    let result = await foo.reply(senderId, '=+ETH')
+
+    expect(result).toMatchObject({
+      recipient: { id: expect.any(String) },
+      message: { text: `0x...` }
+    })
+  })
 })  

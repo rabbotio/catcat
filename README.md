@@ -78,7 +78,9 @@ Will handle chat related
 
 ### Wallets
 - [ ] `=`                  // To begin flow of `=` command.
-- [ ] `=+`                 // To create new wallet.
+- [ ] `=+`                 // To create new wallet, will show `ETH`, `XLM` options.
+- [ ] `=+eth`              // To create new `ETH` wallet.
+- [ ] `=+xlm`              // To create new `XLM` wallet.
 - [ ] `=-`                 // To show list for remove wallet.
 
 ### Portfolio
