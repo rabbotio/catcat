@@ -29,14 +29,11 @@
     ]
   },
   "exclude": [
-    "lib/fetcher/node_modules",
-    "lib/fetcher/node_modules/**",
     "node_modules",
     "node_modules/**",
     "dist",
     ".next",
-    "bin",
-    "components/common"
+    "bin"
   ],
   "compileOnSave": true
 }
