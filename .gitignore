@@ -28,3 +28,5 @@ provider/**/*.js
 model/**/*.js
 lib/**/*.js
 *.js
+
+serviceAccountKey.json
