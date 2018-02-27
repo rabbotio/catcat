@@ -16,8 +16,8 @@ firebase init
 
 ## Features
 ### Basic bank
-- [ ] Can create wallet
-- [ ] Can and link it with Facebook user.
+- [x] Can create wallet
+- [ ] Can and link it with Facebook Messenger user.
 - [ ] Can show current balance of each wallet.
 - [ ] Can validate wallet address.
 - [ ] Can transfer coins at lowest rate or fastest time use.

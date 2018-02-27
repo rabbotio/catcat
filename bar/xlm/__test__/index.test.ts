@@ -13,7 +13,7 @@ describe('XLMService', () => {
 
     const fbmId = 123456
 
-    const result = await _XLKService.createAndLinkWithFacebook(fbmId)
+    const result = await _XLKService.createAndLinkWithFacebookMessenger(fbmId)
     expect(result).toMatchObject(
       {
         publicKey: expect.any(String),

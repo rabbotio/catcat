@@ -18,20 +18,20 @@ class XLMService {
     }
   }
 
-  linkWithFacebook = async (publicKey, fbmId) => {
-    console.log('linkWithFacebook:', publicKey, fbmId)
+  linkWithFacebookMessenger = async (publicKey, fbmId) => {
+    console.log('linkWithFacebookMessenger:', publicKey, fbmId)
     const fetcher = require('@rabbotio/fetcher')
-    const result = await fetcher.postJSON(`${this.FIREBASE_URI}/link`, { provider: 'facebook', id: fbmId, publicKey })
+    const result = await fetcher.postJSON(`${this.FIREBASE_URI}/link`, { provider: 'fbm', id: fbmId, publicKey })
     return {
       publicKey,
       fbmId,
     }
   }
 
-  createAndLinkWithFacebook = async (fbmId) => {
-    console.log('createAndLinkWithFacebook:', fbmId)
+  createAndLinkWithFacebookMessenger = async (fbmId) => {
+    console.log('createAndLinkWithFacebookMessenger:', fbmId)
     const account = await this.createAccount()
-    const linkedAccount = await this.linkWithFacebook(account.public, fbmId)
+    const linkedAccount = await this.linkWithFacebookMessenger(account.public, fbmId)
     return linkedAccount
   }
 }
