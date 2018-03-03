@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
+    "firebase": "cd firebase/functions && npm run serve",
     "serve": "wt serve index.js --secrets-file .env",
     "deploy": "npm run build && wt create index.js --bundle --secrets-file .env",
     "prod": "npm run build && npm run deploy",
@@ -28,6 +29,7 @@
     "cors": "^2.8.4",
     "es6-promise": "^4.2.4",
     "express": "^4.16.2",
+    "fb-messenger": "^1.2.0",
     "helmet": "^3.11.0",
     "isomorphic-fetch": "^2.2.1",
     "stellar-base": "^0.7.7",

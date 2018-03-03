@@ -1,43 +1,31 @@
-// ================================
-class Responder {
-  facebookURL = `https://graph.facebook.com/v2.6/me/messages`
-  accessToken = null
+const FBMessenger = require('fb-messenger')
 
+class Responder extends (FBMessenger as { new(accessToken: string): any; }) {
   constructor(accessToken: string) {
-    this.accessToken = accessToken
-  }
+    super(accessToken)
 
-  async sendTextMessage(recipientId, messageText) {
-    const messageData = {
-      recipient: {
-        id: recipientId
+    const util = require('util')
+
+    this.sendMessage = util.promisify(this.sendMessage)
+    this.sendTextMessage = util.promisify(this.sendTextMessage)
+    this.setPersistentMenu = util.promisify(this.setPersistentMenu)
+
+    // TODO : move to somewhere else?
+    const menuItems = [
+      {
+        "title": "Pay Bill",
+        "type": "postback",
+        "payload": "PAYBILL_PAYLOAD"
       },
-      message: {
-        text: messageText
+      {
+        "type": "web_url",
+        "title": "Latest News",
+        "url": "https://www.messenger.com/",
+        "webview_height_ratio": "full"
       }
-    };
+    ]
 
-    return this.callSendAPI(this.accessToken, messageData);
-  }
-
-  async callSendAPI(accessToken, messageData) {
-    const { postJSON } = require('@rabbotio/fetcher')
-    return postJSON(`${this.facebookURL}?access_token=${accessToken}`, messageData)
-      .then(json => {
-        const recipientId = json.recipient_id;
-        const messageId = json.message_id;
-
-        if (messageId) {
-          console.log("Successfully sent message with id %s to recipient %s",
-            messageId, recipientId);
-        } else {
-          console.log("Successfully called Send API for recipient %s",
-            recipientId);
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    this.setPersistentMenu('314223362412440', menuItems).catch(console.log)
   }
 }
 

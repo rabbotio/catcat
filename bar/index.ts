@@ -1,6 +1,6 @@
 import Cryptox from '@rabbotio/cryptox'
 class Bar extends Cryptox {
-  // TODO
+  getPrice = Cryptox.getPrice
 }
 
 module.exports = Bar

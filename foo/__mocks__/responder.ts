@@ -2,8 +2,17 @@
 const BaseResponder = require('../../providers/facebook/responder')
 
 class MockResponder extends BaseResponder {
-  async callSendAPI(accessToken, messageData) {
-    return messageData
+  sendTextMessage(recipientId, messageText, callback) {
+    const data = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: messageText
+      }
+    }
+
+    callback(null, data)
   }
 }
 

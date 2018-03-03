@@ -43,9 +43,9 @@ class Foo {
         return getPortfolio
 
       case 'getPrice':
-        const exchange = 'bx'
+        const exchange = 'binance'
         const from = command.params[0]
-        const to = command.params[1] || 'THB'
+        const to = command.params[1] || 'USD'
 
         const Bar = require('../bar')
         const price = await Bar.getPrice(exchange, from, to).catch(err => {

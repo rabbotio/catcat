@@ -39,7 +39,7 @@ describe('Foo', () => {
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${price.last} THB` }
+      message: { text: `1 OMG = ${price.last} USD` }
     })
   })
 
@@ -52,7 +52,7 @@ describe('Foo', () => {
 
     expect(result).toMatchObject({
       recipient: { id: expect.any(String) },
-      message: { text: `1 OMG = ${price.last} THB` }
+      message: { text: `1 OMG = ${price.last} USD` }
     })
   })
 
@@ -123,7 +123,7 @@ describe('Foo', () => {
     let profit = 0
     let invest = 0
 
-    const mutatePortFolio = async (bidPrice, bidAmount, currency = 'THB') => new Promise(async (resolve, reject) => {
+    const mutatePortFolio = async (bidPrice, bidAmount, currency = 'USD') => new Promise(async (resolve, reject) => {
       const result = await foo.reply(senderId, `^+${bidAmount} ${symbolId} ${bidPrice} ${currency}`)
       amount += bidAmount
       profit += (last - bidPrice) * bidAmount
@@ -143,13 +143,13 @@ describe('Foo', () => {
       return resolve(true)
     })
 
-    // Try with 1 omg at 100 thb
+    // Try with 1 omg at 100 USD
     await mutatePortFolio(100, 1)
 
-    // Add another 1 omg at 100 thb
+    // Add another 1 omg at 100 USD
     await mutatePortFolio(100, 1)
 
-    // Add another 2 omg at 100 thb
+    // Add another 2 omg at 100 USD
     await mutatePortFolio(100, 2)
 
     // Add another 1 omg at lower 50% from current price

@@ -64,12 +64,12 @@ Will handle chat related
 - [ ] `-omg`               // To send `OMG` with prompt for `value` then `to` targeted user.
 - [ ] `-100 omg`           // To send `100` as `OMG` with prompt for `to` targeted user.
 
-### Receive
+### Request
 - [ ] `+`                  // To begin flow of `+` command.
-- [ ] `+100 omg @katopz`   // To ask for `100` as `OMG` from user name `@katopz`.
+- [ ] `+100 omg @katopz`   // To request for `100` as `OMG` from user name `@katopz`.
 - [ ] `++`                 // To repeat last `+` command with prompt for `to` targeted user.
-- [ ] `+omg`               // To send `OMG` with prompt for `value` then `to` targeted user.
-- [ ] `+100 omg`           // To send `100` as `OMG` with prompt for `to` targeted user.
+- [ ] `+omg`               // To request `OMG` with prompt for `value` then `to` targeted user.
+- [ ] `+100 omg`           // To request `100` as `OMG` with prompt for `to` targeted user.
 
 ### Chart
 - [ ] `#`                  // To begin flow of `#` command and list last or top 4 symbols.
